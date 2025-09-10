@@ -65,52 +65,50 @@
 
 "use client";
 import { useState } from "react";
+import { Todo } from "@/components/Todo";
 
 export default function Home() {
   const [number, setNumber] = useState(0);
+  const [journal, setJournal] = useState("");
 
-  const handleIncrement = () => setNumber(number + 1);
-  const handleDecrement = () => setNumber(number - 1);
+  const savetasks = () => setJournal(`${number}`);
 
   return (
     <div className="w-full h-screen flex items-center justify-center bg-gray-100 gap-10">
-      <div className="w-[420px] bg-white rounded-lg p-8 flex flex-col items-center shadow-[0_0_25px_rgba(0,0,0,0.1)]">
+      <div className="w-[420px] bg-white rounded-sm p-8 flex flex-col items-center shadow-[0_0_25px_rgba(0,0,0,0.1)]">
         <h1 className="text-3xl  text-black">To-Do List</h1>
 
         <div className="mt-6 w-full flex items-center gap-3">
-          <div className="flex  w-100 h-10 rounded-xl  border border-gray-300 shadow-inner ">
-            <p className="p-2 text-gray-500">Add a new task... {number}</p>
+          <div className="flex  w-100 h-10  rounded-sm  border border-gray-300 shadow-inner ">
+            <input
+              type="text"
+              placeholder="Enter a tasks"
+              onChange={(e) => setNumber(e.target.value)}
+            />
           </div>
 
-          <button className="w-20 h-10 rounded-xl bg-gray-200 text-gray-700  shadow hover:bg-blue-600 hover:text-white transition duration-200">
+          <button
+            onClick={savetasks}
+            className="w-20 h-10 rounded-xl bg-blue-600 text-gray-700  shadow active:bg-blue-600 hover:text-white transition duration-200"
+          >
             Add
           </button>
         </div>
 
         <div className="flex gap-4 mt-6 h-10">
-          <button
-            onClick={handleDecrement}
-            className="px-4 rounded-lg bg-gray-200 text-gray-700 
-               hover:bg-blue-500 hover:text-white 
-               transition duration-200"
-          >
-            All
-          </button>
-          <button
-            onClick={handleIncrement}
-            className="px-4 rounded-lg bg-gray-200 text-gray-700 
-               hover:bg-green-500 hover:text-white 
-               shadow-sm active:scale-95 transition duration-200"
-          >
-            + Increase
-          </button>
-          <button
-            onClick={handleDecrement}
-            className="px-4 rounded-lg bg-gray-200 text-gray-700 
-               hover:bg-red-500 hover:text-white 
-               shadow-sm active:scale-95 transition duration-200"
-          >
-            - Decrease
+          <Todo text="All"></Todo>
+          <Todo text="active"></Todo>
+          <Todo text="completed"></Todo>
+        </div>
+
+        <div className="bg-gray-100 flex w-full h-20 mt-5 rounded-lg justify-between">
+          <div className="flex gap-2 p-6">
+            <button className="border border-gray-800 rounded-sm  w-5 h-5"></button>
+            <p className=" text-gray-500">{journal}</p>
+          </div>
+
+          <button className="text-red-500 mt-5 mr-2 bg-red-100  h-8 w-20 rounded-2xl">
+            Delete
           </button>
         </div>
 
