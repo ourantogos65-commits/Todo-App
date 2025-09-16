@@ -1,11 +1,11 @@
 "use client"
 import React from "react";
 
-export const Todo = ({ onClick,text }) => {
+export const CheckBox= ({ text }) => {
   return (
     <button
-      onClick={onClick}
-      className=" px-3 py-1 rounded-xl bg-gray-200 text-gray-700 
+   
+      className="h-8 w-20  rounded-xl bg-gray-200 text-gray-700 
                hover:bg-blue-500 hover:text-white 
                transition duration-200"
     >
