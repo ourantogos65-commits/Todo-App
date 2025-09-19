@@ -1,59 +1,63 @@
 "use client";
 import { useState } from "react";
-import { Button } from "@/components/Button";
+import { InputAdd } from "@/components/InputAdd";
 import { Todolist } from "@/components/Todolist";
 import { Todo } from "@/components/Todo";
 import { v4 as uuidv4 } from 'uuid';
 
 
 
+
 export default function Home() {
   const [todos, setTodos] = useState([]);
   const [inputValue, setInputValue] = useState("");
+  const [filter,setfilter]=useState("all")
+
+
+  const filteredTodos=todos.filter(todo=> {
+    if(filter==="active") return!todo.completed;
+    if (filter === "completed") return todo.completed;
+    return true;
+  })
+
+
+ 
 
   const handleOnClick = () => {
-  const  newTodo=
-    {id:uuidv4(), text:inputValue,complated:false }
-    
-  
+  const  newTodo= {id:uuidv4(), text:inputValue,completed:false} 
     setTodos([...todos, newTodo]);
     setInputValue("");
   };
 
+  
   const handleOnChange = (e) => {
-    
-    setInputValue(e.target.value);
+ setInputValue(e.target.value);
   };
 const handleRemove=(id)=>{
-  setTodos(todos.filter(todo=>todo.id !==id))
+setTodos(todos.filter(todo=>todo.id !==id))
 }
+const checkBox=(id)=>{
+  setTodos(todos.map(todo=>todo.id===id?{...todo,completed:!todo.completed}:todo
 
+  ))
+
+}
 
   return (
     <div className="w-full h-screen flex items-center justify-center bg-gray-100 p-6">
       <div className="w-[420px] overflow-hidden bg-white rounded-2xl p-8 gap-3 flex flex-col items-center shadow-2xl">
         <h1 className="text-4xl  text-gray-800 mb-6">To-Do List</h1>
 
-        <div className="flex w-full  gap-2 ">
-          <input
-            type="text"
-            placeholder="Enter a task"
-            value={inputValue}
-            onChange={handleOnChange}
-            className="flex-1 px-4 py-2 border border-gray-300 rounded-lg "
-          />
-          <Button handleOnClick={handleOnClick} > Add </Button>
-           
-        </div>
+       <InputAdd inputValue={inputValue} handleOnchange={handleOnChange} handleOnClick={handleOnClick}/>
         <div className="flex gap-2  mr-30">
-           <Todo  text="All" />
-           <Todo text="Active" />
-           <Todo text="Completed" />
+           <Todo onClick={() => setfilter("all")} text="All" />
+           <Todo onClick={() => setfilter("active")} text="Active" />
+           <Todo  onClick={() => setfilter("completed")} text="Completed" />
         </div>
   
       <div className="w-full h-60 overflow-auto">
- 
-         <Todolist   handleRemove={handleRemove}   todos={todos}/>
+
+         <Todolist checkBox={checkBox} handleRemove={handleRemove}   filteredTodos={filteredTodos}/>
       </div>
       
     <div className="mt-1.5 ">
@@ -61,6 +65,7 @@ const handleRemove=(id)=>{
        <p className="text-gray-400">Powered by Pinecone Academy</p>
     </div>
        
+
       </div>
     </div>
   );
