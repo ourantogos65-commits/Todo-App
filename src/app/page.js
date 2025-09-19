@@ -55,7 +55,7 @@ const checkBox=(id)=>{
            <Todo  onClick={() => setfilter("completed")} text="Completed" />
         </div>
   
-      <div className="w-full h-60 overflow-auto">
+      <div className="w-full h-50 overflow-auto">
 
          <Todolist checkBox={checkBox} handleRemove={handleRemove}   filteredTodos={filteredTodos}/>
       </div>
