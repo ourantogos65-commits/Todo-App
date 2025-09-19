@@ -49,7 +49,7 @@ const checkBox=(id)=>{
         <h1 className="text-4xl  text-gray-800 mb-6">To-Do List</h1>
 
        <InputAdd inputValue={inputValue} handleOnchange={handleOnChange} handleOnClick={handleOnClick}/>
-        <div className="flex gap-2  mr-30">
+        <div className="flex gap-2  mr-30 cursor-pointer">
            <Todo onClick={() => setfilter("all")} text="All" />
            <Todo onClick={() => setfilter("active")} text="Active" />
            <Todo  onClick={() => setfilter("completed")} text="Completed" />

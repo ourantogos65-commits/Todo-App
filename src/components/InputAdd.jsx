@@ -6,7 +6,7 @@ return(
     <div className="flex w-full gap-2">
     <input
      type="text"
-     placeholder="enter a tasks" 
+     placeholder="Add a task..." 
      value={inputValue}
      onChange={handleOnchange}
      className="flex-1 px-4 py-2 border border-gray-300 rounded-lg "
